@@ -1,6 +1,5 @@
 let currencySymbol = '$';
 let currency = 'USD';
-let owesMoney = false;
 
 // Draws product list
 function drawProducts() {
@@ -46,22 +45,20 @@ function drawCart() {
     //     : (cartList.innerHTML = 'Your Cart is Empty');
     // only show the empty cart button if there are items in the cart
     let shoppingCart = document.querySelector('.empty-btn'); 
-    let paymentButton = document.querySelector('.pay');
     if (cart.length) {
         cartList.innerHTML = cartItems;
         shoppingCart.classList.remove("hidden");
-        paymentButton.disabled = false;
     }
     else {
         shoppingCart.classList.add("hidden");
         cartList.innerHTML = 'Your Cart is Empty';
-        paymentButton.disabled = true;
     }
 }
 
 // Draws checkout
 function drawCheckout() {
     let checkout = document.querySelector('.cart-total');
+    let paymentButton = document.querySelector('.pay');
     checkout.innerHTML = '';
 
     // run cartTotal() from script.js
@@ -70,6 +67,11 @@ function drawCheckout() {
     let div = document.createElement('div');
     div.innerHTML = `<p>Cart Total: ${currencySymbol}${ currencyExchange(currency, cartSum) }`;
     checkout.append(div);
+    if (cartSum === 0) {
+        paymentButton.disabled = true;
+    } else {
+        paymentButton.disabled = false;
+    }
 }
 
 // Initialize store with products, cart, and checkout
@@ -129,15 +131,19 @@ document.querySelector('.pay').addEventListener('click', (e) => {
 
     let paymentSummary = document.querySelector('.pay-summary');
     let div = document.createElement('div');
+    let paymentButton = document.querySelector('.pay');
 
     // If total cash received is greater than cart total thank customer
     // Else request additional funds
     if (cashReturn >= 0) {
+        document.querySelector('.received').value = '';
         div.innerHTML = `
             <p>Cash Received: <span class="bold">${currencySymbol}${ amount.toFixed(2) }</span></p>
             <p>Cash Returned: <span class="success bold">${currencySymbol}${cashReturn.toFixed(2) }</span></p>
             <p class="success bold">Thank you!</p>
         `;
+        // disable the payment button if they paid in full
+        paymentButton.disabled = true;
     } else {
         // reset cash field for next entry
         document.querySelector('.received').value = '';
@@ -147,6 +153,8 @@ document.querySelector('.pay').addEventListener('click', (e) => {
             <p class="error bold">Please pay additional amount.</p>
             <hr/>
         `;
+        // enable the payment button if they added more to the cart or if there is a balance
+        paymentButton.disabled = false;
     }
 
     paymentSummary.append(div);
@@ -204,9 +212,9 @@ document.querySelector('.currency-select').addEventListener('change', function h
             break;
      }
 
-    drawProducts(event.target.value);
-    drawCart(event.target.value);
-    drawCheckout(event.target.value);
+    drawProducts();
+    drawCart();
+    drawCheckout();
 });
 /* End currency converter */
 /* End standout suggestions */

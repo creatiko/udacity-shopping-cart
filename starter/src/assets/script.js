@@ -160,5 +160,6 @@ module.exports = {
   cartTotal,
   pay, 
   emptyCart,
-  currencyExchange
+  currencyExchange,
+  totalPaid
 }
