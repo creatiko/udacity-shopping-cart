@@ -82,3 +82,11 @@ button:hover {
     border: 1px solid #ccc;
     vertical-align: middle
 }
+
+.hidden {
+    display: none;
+}
+
+.empty {
+    display: block;
+}

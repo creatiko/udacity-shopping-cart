@@ -46,7 +46,7 @@ describe('Checkout Functionality Tests', () => {
     let product2 = cart.products[2];
     let cartArr = cart.cart;
 
-    // Functiion get's grand total of cart
+    // Function get's grand total of cart
     function grandTotal() {
         let cartSum = 0;
 
