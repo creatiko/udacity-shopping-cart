@@ -130,17 +130,17 @@ document.querySelector('.pay').addEventListener('click', (e) => {
     // Else request additional funds
     if (cashReturn >= 0) {
         div.innerHTML = `
-            <p>Cash Received: ${currencySymbol}${ amount.toFixed(2) }</p>
-            <p>Cash Returned: ${currencySymbol}${ cashReturn.toFixed(2) }</p>
-            <p>Thank you!</p>
+            <p>Cash Received: <span class="bold">${currencySymbol}${ amount.toFixed(2) }</span></p>
+            <p>Cash Returned: <span class="success bold">${currencySymbol}${cashReturn.toFixed(2) }</span></p>
+            <p class="success bold">Thank you!</p>
         `;
     } else {
         // reset cash field for next entry
         document.querySelector('.received').value = '';
         div.innerHTML = `
-            <p>Cash Received: ${currencySymbol}${ amount.toFixed(2) }</p>
-            <p>Remaining Balance: ${currencySymbol}${ Math.abs(cashReturn).toFixed(2) }</p>
-            <p>Please pay additional amount.</p>
+            <p>Cash Received: <span class="bold">${currencySymbol}${ amount.toFixed(2) }</span></p>
+            <p>Remaining Balance: <span class="error bold">${currencySymbol}${ Math.abs(cashReturn).toFixed(2) }</span></p>
+            <p class="error bold">Please pay additional amount.</p>
             <hr/>
         `;
     }

@@ -90,3 +90,12 @@ button:hover {
 .empty {
     display: block;
 }
+.error {
+    color:rgb(204, 5, 5);
+}
+.success {
+    color:rgb(38, 161, 27);
+}
+.bold {
+    font-weight: 700;
+}
