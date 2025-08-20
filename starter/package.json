@@ -8,7 +8,7 @@
     "start": "live-server --port=3000 src"
   },
   "author": "Luis Carlos Ordonez",
-  "license": "SEE LICENSE IN LICENSE.md",
+  "license": "SEE LICENSE IN LICENSE.txt",
   "dependencies": {
     "jest": "^27.5.1",
     "live-server": "^1.2.1"
