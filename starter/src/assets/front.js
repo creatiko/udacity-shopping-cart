@@ -1,5 +1,6 @@
 let currencySymbol = '$';
 let currency = 'USD';
+let owesMoney = false;
 
 // Draws product list
 function drawProducts() {
@@ -45,13 +46,16 @@ function drawCart() {
     //     : (cartList.innerHTML = 'Your Cart is Empty');
     // only show the empty cart button if there are items in the cart
     let shoppingCart = document.querySelector('.empty-btn'); 
+    let paymentButton = document.querySelector('.pay');
     if (cart.length) {
         cartList.innerHTML = cartItems;
         shoppingCart.classList.remove("hidden");
+        paymentButton.disabled = false;
     }
     else {
         shoppingCart.classList.add("hidden");
         cartList.innerHTML = 'Your Cart is Empty';
+        paymentButton.disabled = true;
     }
 }
 
@@ -85,7 +89,7 @@ document.querySelector('.products').addEventListener('click', (e) => {
 document.querySelector('.cart').addEventListener('click', (e) => {
     // Helper nested higher order function to use below
     // Must be nested to have access to the event target
-    // Takes in a cart function as an agrument
+    // Takes in a cart function as an argument
     function runCartFunction(fn) {
         let productId = e.target.parentNode.getAttribute('data-productId');
         productId *= 1;
