@@ -1,12 +1,6 @@
+let totalPaid = 0;
+
 /* Create an array named products which you will use to add all of your product object literals that you create in the next step. */
-const products = [
-  { name: "Cherries", price: 8, quantity: 0, productId: 1, image: "/images/cherry.jpg" },
-  { name: "Oranges", price: 10, quantity: 0, productId: 2, image: "/images/orange.jpg" },
-  { name: "Strawberries", price: 5, quantity: 0, productId: 3, image: "/images/strawberry.jpg" },
-  { name: "Bananas", price: 4, quantity: 0, productId: 4, image: "/images/banana.jpg" },
-  { name: "Pineapples", price: 15, quantity: 0, productId: 5, image: "/images/pineapple.jpg" },
-  { name: "Blackberries", price: 6, quantity: 0, productId: 6, image: "/images/blackberry.jpg" },
-  ];
 /* Create 3 or more product objects using object literal notation 
    Each product should include five properties
    - name: name of product (string)
@@ -15,7 +9,14 @@ const products = [
    - productId: unique id for the product (number)
    - image: picture of product (url string)
 */
-
+const products = [
+  { name: "Cherries", price: 8, quantity: 0, productId: 1, image: "/images/cherry.jpg" },
+  { name: "Oranges", price: 10, quantity: 0, productId: 2, image: "/images/orange.jpg" },
+  { name: "Strawberries", price: 5, quantity: 0, productId: 3, image: "/images/strawberry.jpg" },
+  { name: "Bananas", price: 4, quantity: 0, productId: 4, image: "/images/banana.jpg" },
+  { name: "Pineapples", price: 15, quantity: 0, productId: 5, image: "/images/pineapple.jpg" },
+  { name: "Blackberries", price: 6, quantity: 0, productId: 6, image: "/images/blackberry.jpg" },
+  ];
 
 /* Images provided in /images folder. All images from Unsplash.com
    - cherry.jpg by Mae Mu
@@ -29,32 +30,30 @@ const products = [
 
 /* Declare an empty array named cart to hold the items in the cart */
 const cart = [];
+
 /* Create a function named addProductToCart that takes in the product productId as an argument
   - addProductToCart should get the correct product based on the productId
   - addProductToCart should then increase the product's quantity
   - if the product is not already in the cart, add it to the cart
 */
+
 function addProductToCart(productId) {
   // check if product exists, else ?? not found?
   const foundProduct = products.find(product => product.productId === productId);
   if (foundProduct) {
-    //console.log(`Found product: ${foundProduct.name} with ID: ${foundProduct.productId}`);
     // check if the product is actually in the cart 
     const isProductInCart = cart.find(cart => cart.productId === productId)
     if (isProductInCart) {
-      //console.log(`Found product: ${isProductInCart.name} with ID: ${isProductInCart.productId}, there ${isProductInCart.quantity === 1 ? "is" : "are"} ${isProductInCart.quantity} in the cart.`);
       // product is in the cart, just increase the quantity
       increaseQuantity(productId);
     } else {
       // product is not in the cart, add it, it adds it at 0 so increase the quantity
-      //cart.push({ ...foundProduct });
       cart.push(foundProduct);
       increaseQuantity(productId);
     }
   } else {
     console.log(`Product with ID ${productId} not found.`);
   }
-  // if(cart.length > 0) 
 };
 
 /* Create a function named increaseQuantity that takes in the productId as an argument
@@ -68,7 +67,6 @@ function increaseQuantity(productId) {
     }
   });
 }
-
 
 /* Create a function named decreaseQuantity that takes in the productId as an argument
   - decreaseQuantity should get the correct product based on the productId
@@ -88,6 +86,7 @@ function decreaseQuantity(productId) {
   - removeProductFromCart should update the product quantity to 0
   - removeProductFromCart should remove the product from the cart
 */
+
 function removeProductFromCart(productId) {
   const indexToRemove = cart.findIndex(cart => cart.productId === productId);
   cart[indexToRemove].quantity = 0; // change the quantity back to zero
@@ -101,6 +100,7 @@ function removeProductFromCart(productId) {
   - cartTotal should return the total cost of the products in the cart
   Hint: price and quantity can be used to determine total cost
 */
+
 function cartTotal() {
   let cartTotal = 0;
   for (const item of cart) {
@@ -123,15 +123,11 @@ function emptyCart() {
   Hint: cartTotal function gives us cost of all the products in the cart  
 */
 function pay(amount, currency) {
+  totalPaid += amount;
   const balance = currencyExchange(currency, cartTotal());
-  const change = amount - balance;
+  const change = totalPaid - balance;
   return change;
 }
-
-// const paid = 50;
-// const change = pay(paid);
-// console.log(`You paid $${Number.parseFloat(paid).toFixed(2)} ${change > 0 ? "your change is $" : "you have a balance of $"}${Number.parseFloat(Math.abs(change)).toFixed(2)}`);
-
 
 /* Place stand out suggestions here (stand out suggestions can be found at the bottom of the project rubric.)*/
 
@@ -164,6 +160,5 @@ module.exports = {
   cartTotal,
   pay, 
   emptyCart,
-  /* Uncomment the following line if completing the currency converter bonus */
   currencyExchange
 }
