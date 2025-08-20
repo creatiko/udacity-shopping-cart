@@ -1,4 +1,5 @@
 let totalPaid = 0;
+let errorMsg = '';
 
 /* Create an array named products which you will use to add all of your product object literals that you create in the next step. */
 /* Create 3 or more product objects using object literal notation 
@@ -52,7 +53,8 @@ function addProductToCart(productId) {
       increaseQuantity(productId);
     }
   } else {
-    console.log(`Product with ID ${productId} not found.`);
+    // To Do: implement error messages in the front end
+    errorMsg = `Product with ID ${productId} not found.`;
   }
 };
 
@@ -109,7 +111,6 @@ function cartTotal() {
   }
   return cartTotal; // Return the final total
 }
-//console.log("Your total is $" + cartTotal());
 
 /* Create a function called emptyCart that empties the products from the cart */
 function emptyCart() {
