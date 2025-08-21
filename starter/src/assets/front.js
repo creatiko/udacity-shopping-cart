@@ -1,3 +1,5 @@
+//const { paidInFull, emptyCart } = require("./script");
+
 let currencySymbol = '$';
 let currency = 'USD';
 
@@ -73,6 +75,11 @@ function drawCheckout() {
         paymentButton.disabled = false;
     }
 }
+// clears the receipt
+function emptyReceipt() {
+    let paymentSummary = document.querySelector('.pay-summary');
+    paymentSummary.innerHTML = '';
+}
 
 // Initialize store with products, cart, and checkout
 drawProducts();
@@ -142,8 +149,16 @@ document.querySelector('.pay').addEventListener('click', (e) => {
             <p>Cash Returned: <span class="success bold">${currencySymbol}${cashReturn.toFixed(2) }</span></p>
             <p class="success bold">Thank you!</p>
         `;
-        // disable the payment button if they paid in full
+        // disable the payment button if they paid in full and reset the cart.
         paymentButton.disabled = true;
+        // wait 3 seconds and reset everything
+        setTimeout(() => {
+            paidInFull();
+            emptyCart();
+            drawCart();
+            drawCheckout();
+            emptyReceipt();
+        }, "3000");
     } else {
         // reset cash field for next entry
         document.querySelector('.received').value = '';

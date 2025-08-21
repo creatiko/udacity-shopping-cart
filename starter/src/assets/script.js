@@ -114,6 +114,9 @@ function cartTotal() {
 
 /* Create a function called emptyCart that empties the products from the cart */
 function emptyCart() {
+  cart.forEach(cart => {
+    cart.quantity = 0;
+  });
   cart.splice(0, cart.length);
 };
 
@@ -123,16 +126,22 @@ function emptyCart() {
   - pay will return a positive number if money should be returned to customer
   Hint: cartTotal function gives us cost of all the products in the cart  
 */
-function pay(amount, currency) {
+
+function pay(amount, currency = "USD") {
   totalPaid += amount;
-  const balance = currencyExchange(currency, cartTotal());
-  const change = totalPaid - balance;
+  let balance = Number(currencyExchange(currency, cartTotal()));
+  let change = totalPaid - balance;
   return change;
+}
+
+function paidInFull(){
+  totalPaid = 0;
 }
 
 /* Place stand out suggestions here (stand out suggestions can be found at the bottom of the project rubric.)*/
 
-function currencyExchange(currency, amount){
+function currencyExchange(amount, currency) {
+  let priceCurrency; // ✅ declared properly
   if (currency === "EUR") {
     priceCurrency = (amount * 0.86).toFixed(2);
   }
@@ -162,5 +171,6 @@ module.exports = {
   pay, 
   emptyCart,
   currencyExchange,
-  totalPaid
+  paidInFull,
+  getTotalPaid: () => totalPaid, // getter for tests if needed
 }
