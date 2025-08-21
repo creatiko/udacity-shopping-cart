@@ -46,6 +46,11 @@ describe('Checkout Functionality Tests', () => {
     let product2 = cart.products[2];
     let cartArr = cart.cart;
 
+    beforeEach(() => {
+        cart.emptyCart();    // clear the cart
+        cart.paidInFull();   // reset totalPaid back to 0
+    });
+
     // Function get's grand total of cart
     function grandTotal() {
         let cartSum = 0;
@@ -66,13 +71,13 @@ describe('Checkout Functionality Tests', () => {
         expect(cart.cartTotal()).toEqual(grandTotal());
     });
 
+    test('pay more than the total works', () => {
+        expect(cart.pay(100000000000000)).toBeGreaterThan(grandTotal());
+    });
+
     test('pay less than the total works', () => {
         cart.addProductToCart(product1.productId);
         cart.addProductToCart(product2.productId);
         expect(cart.pay(1)).toBeLessThan(grandTotal());
-    });
-
-    test('pay more than the total works', () => {
-        expect(cart.pay(100000000000000)).toBeGreaterThan(grandTotal());
     });
 });
