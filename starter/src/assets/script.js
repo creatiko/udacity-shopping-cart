@@ -140,8 +140,8 @@ function paidInFull(){
 
 /* Place stand out suggestions here (stand out suggestions can be found at the bottom of the project rubric.)*/
 
-function currencyExchange(amount, currency) {
-  let priceCurrency; // ✅ declared properly
+function currencyExchange(currency, amount) {
+  let priceCurrency;
   if (currency === "EUR") {
     priceCurrency = (amount * 0.86).toFixed(2);
   }
