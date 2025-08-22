@@ -64,15 +64,16 @@ describe('Checkout Functionality Tests', () => {
         return cartSum;
     }
 
+
+    test('pay more than the total works', () => {
+        expect(cart.pay(100000000000000)).toBeGreaterThan(grandTotal());
+    });
+
     test('cartTotal gets grand total of cart', () => {
         cart.addProductToCart(product1.productId);
         cart.addProductToCart(product2.productId);
         cart.increaseQuantity(product1.productId);
         expect(cart.cartTotal()).toEqual(grandTotal());
-    });
-
-    test('pay more than the total works', () => {
-        expect(cart.pay(100000000000000)).toBeGreaterThan(grandTotal());
     });
 
     test('pay less than the total works', () => {
