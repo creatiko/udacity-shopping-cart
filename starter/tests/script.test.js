@@ -64,6 +64,8 @@ describe('Checkout Functionality Tests', () => {
         return cartSum;
     }
 
+    //returns the sum of the cart
+
 
     test('pay more than the total works', () => {
         expect(cart.pay(100000000000000)).toBeGreaterThan(grandTotal());
