@@ -17,6 +17,9 @@ const products = [
   { name: "Bananas", price: 4, quantity: 0, productId: 4, image: "/images/banana.jpg" },
   { name: "Pineapples", price: 15, quantity: 0, productId: 5, image: "/images/pineapple.jpg" },
   { name: "Blackberries", price: 6, quantity: 0, productId: 6, image: "/images/blackberry.jpg" },
+  { name: "Pears", price: 7, quantity: 0, productId: 7, image: "/images/pear.jpg" },
+  { name: "Raspberries", price: 8, quantity: 0, productId: 8, image: "/images/raspberry.jpg" },
+  { name: "Tangerines", price: 6, quantity: 0, productId: 9, image: "/images/tangerine.jpg" },
   ];
 
 /* Images provided in /images folder. All images from Unsplash.com
